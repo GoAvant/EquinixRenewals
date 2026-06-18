@@ -1,0 +1,151 @@
+table 'Unknown End Dates'
+	lineageTag: 11f12142-1dd0-40b0-b2cc-e92d5dee1eb2
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 0c30c738-f217-42b0-9b01-19e8d6148c14
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Code'
+		dataType: string
+		lineageTag: aebbbf09-62aa-4eef-9f27-75a9a6b547a9
+		summarizeBy: none
+		sourceColumn: Order Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item Code'
+		dataType: string
+		lineageTag: 828a53e2-f294-400d-94bc-8e8d6c03f06a
+		summarizeBy: none
+		sourceColumn: Item Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column IBX
+		dataType: string
+		lineageTag: e08b7585-f5d9-4cec-a920-5fb073f7d0ee
+		summarizeBy: none
+		sourceColumn: IBX
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Type'
+		dataType: string
+		lineageTag: 56234fae-c944-421f-a93c-4858db79c3c8
+		summarizeBy: none
+		sourceColumn: Revenue Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commission End Date'
+		dataType: string
+		lineageTag: 945be46e-41f0-449c-922b-1c11261bbefa
+		summarizeBy: none
+		sourceColumn: Commission End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Term Length in Months'
+		dataType: string
+		lineageTag: 73daae1a-b4d4-40a2-a0ad-b3d032472422
+		summarizeBy: none
+		sourceColumn: Term Length in Months
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Amount'
+		dataType: decimal
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d1873a4b-535f-4402-8e68-4646ad6e03f2
+		summarizeBy: none
+		sourceColumn: Revenue Amount
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column NewOrderCode
+		dataType: string
+		lineageTag: ec52e54d-88a8-4633-8111-2bb7682dcfa8
+		summarizeBy: none
+		sourceColumn: NewOrderCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Agency'
+		dataType: string
+		lineageTag: fff059f1-9e5c-4b9f-a314-69a4ca3b4a82
+		summarizeBy: none
+		sourceColumn: Billings.Agency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Rep'
+		dataType: string
+		lineageTag: c92e6ea3-c67f-4d06-b591-df17b7db2d18
+		summarizeBy: none
+		sourceColumn: Billings.Rep
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Contract End Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: da173194-7fea-4783-ab7a-f1fc5de0a7ea
+		summarizeBy: none
+		sourceColumn: Billings.Contract End Date
+
+		variation Variation
+			isDefault
+			relationship: e87c74f9-0482-4585-b353-5ff4665bee1b
+			defaultHierarchy: LocalDateTable_e36148ec-b864-4168-bc33-fcc3ad0fdeed.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Billings.Disconnect Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 8160e17e-8913-44ed-b1fb-8710e559d2b0
+		summarizeBy: none
+		sourceColumn: Billings.Disconnect Date
+
+		variation Variation
+			isDefault
+			relationship: 0c09a43a-171f-46c2-856e-7dfdb2d4f3c9
+			defaultHierarchy: LocalDateTable_d8bcfda0-ae13-494d-b566-96d082908bfd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Unknown End Dates-25b4a6f3-5925-4341-bb3a-1241537ffd44' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://avantcommunications1-my.sharepoint.com/personal/jochoa_goavant_net/Documents/PowerBI/Renewals/Equinix/Xactly Exports/Equinix Renewal.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Commission End Date", type date}}),
+				    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type1", {{"Commission End Date", null}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Errors", each ([Commission End Date] = null)),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Customer Name", "Order Code", "Item Code", "IBX", "Revenue Type", "Commission End Date", "Term Length in Months", "Revenue Amount"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Revenue Amount", Currency.Type}}),
+				    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Changed Type", "Text Before Delimiter", each Text.BeforeDelimiter([#"Order Code"], "-", 1), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text Before Delimiter",{{"Text Before Delimiter", "NewOrderCode"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Order Code"}, Billings, {"Account - Original"}, "Billings", JoinKind.LeftOuter),
+				    #"Expanded Billings" = Table.ExpandTableColumn(#"Merged Queries", "Billings", {"Agency", "Rep","Contract End Date", "Disconnect Date"}, {"Billings.Agency", "Billings.Rep", "Billings.Contract End Date", "Billings.Disconnect Date"}),
+				    #"Updated Comms" = Table.ReplaceValue(#"Expanded Billings", null, each [Billings.Contract End Date], Replacer.ReplaceValue, {"Commission End Date"}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Updated Comms", each ([Commission End Date] = null))
+				in
+				    #"Filtered Rows1"
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

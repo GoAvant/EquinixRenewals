@@ -1,0 +1,77 @@
+relationship 0c153f88-03f6-4e44-a4bc-3b98d6fa2633
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Known Accounts'.'Max renewal date'
+	toColumn: LocalDateTable_4f4a7f04-595d-4dd8-9c3c-db496ca100f1.Date
+
+relationship 221d536a-0f6b-439d-9974-06cf433df547
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Known Accounts'.'Min Renewal date'
+	toColumn: LocalDateTable_f2cafdfb-8f74-407c-856c-91329ebf109c.Date
+
+relationship d59c00a9-99c5-418e-b58b-5902a5f086e2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Known Accounts'.'Commission End Date'
+	toColumn: LocalDateTable_f7e4c6b9-6d3d-43ba-b044-645c2955d8dd.Date
+
+relationship c87a82b8-a672-4da1-b11b-445b8f664e2c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Refresh Date'.'Refresh Date'
+	toColumn: LocalDateTable_59e5de0c-59f1-4cd9-9e4c-ac2b039902c3.Date
+
+relationship bada324c-85f1-44e2-8b1b-ea43218ac214
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'All Accounts'.'Month Commissions Earned'
+	toColumn: LocalDateTable_54339def-4b51-4a44-bc72-c3593523db0b.Date
+
+relationship d7f2d3fa-de86-45d5-9293-fd1002b455a5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'All Accounts'.'Commission End Date'
+	toColumn: LocalDateTable_2d736262-68b3-4b32-ac74-b125c6f27661.Date
+
+relationship 4345ab51-0dd8-4610-bca6-425c2b29c45b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'All Accounts'.'Max renewal date'
+	toColumn: LocalDateTable_7ebdf740-914d-4cd2-b5bf-992310c89a40.Date
+
+relationship c45e05df-6464-4f8a-9a1e-a3ec55e3e0ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'All Accounts'.'Min Renewal date'
+	toColumn: LocalDateTable_ac0cd511-980b-485a-986f-099acbafab3f.Date
+
+relationship e87c74f9-0482-4585-b353-5ff4665bee1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Unknown End Dates'.'Billings.Contract End Date'
+	toColumn: LocalDateTable_e36148ec-b864-4168-bc33-fcc3ad0fdeed.Date
+
+relationship 0c09a43a-171f-46c2-856e-7dfdb2d4f3c9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Unknown End Dates'.'Billings.Disconnect Date'
+	toColumn: LocalDateTable_d8bcfda0-ae13-494d-b566-96d082908bfd.Date
+
+relationship 81243470-c06f-44d4-8dce-96000c75d8fc
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'Known Accounts'.'Order Code'
+	toColumn: 'All Accounts'.'Order Code'
+
+relationship 582df6b8-1f1b-4f86-80d1-d5576da8e2da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Known Accounts'.'Billings.Contract End Date'
+	toColumn: LocalDateTable_81f22f78-e3df-4480-8197-255bbfb495de.Date
+
+relationship 09c5562f-9de6-484c-aa99-be2aa7923586
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'All Accounts'.'Billings.Contract End Date'
+	toColumn: LocalDateTable_0eccc50a-3f61-46e8-9a97-87ea0c284d06.Date
+
+relationship 8c51866a-9511-4785-bb59-ae594f9c0d47
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Known Accounts'.'Month Commissions Earned'
+	toColumn: LocalDateTable_ab788379-fef8-4d32-8332-3da45d4364c3.Date
+
+relationship 27a63b74-5378-5341-46ca-9ba9e09feb8a
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: RenewalInput.'Billing Account Name'
+	toColumn: 'All Accounts'.'Billings.Customer Names'
+

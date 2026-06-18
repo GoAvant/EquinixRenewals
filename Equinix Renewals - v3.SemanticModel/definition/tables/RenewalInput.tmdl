@@ -1,0 +1,138 @@
+table RenewalInput
+	lineageTag: 899a0b0d-46c9-4fab-ba1b-470791da9751
+
+	column 'Billing Account Name'
+		dataType: string
+		lineageTag: 8b315e87-8b61-4ab7-a23a-fc922d1c390d
+		summarizeBy: none
+		sourceColumn: Billing Account Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal ID'
+		dataType: string
+		lineageTag: 0c4467ce-b3f9-46bc-956c-61f66d7fd749
+		summarizeBy: none
+		sourceColumn: Deal ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Agreement Number'
+		dataType: string
+		lineageTag: 7477fe95-e296-4d25-881a-1711838c9beb
+		summarizeBy: none
+		sourceColumn: Billing Agreement Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Derived Opportunity Partner Name'
+		dataType: string
+		lineageTag: ef15db4a-756e-4689-a767-33801088c147
+		summarizeBy: none
+		sourceColumn: Derived Opportunity Partner Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Partner Sub Type'
+		dataType: string
+		lineageTag: 1f832b0a-a873-4967-88c0-1a12bce36162
+		summarizeBy: none
+		sourceColumn: Opportunity Partner Sub Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Agent Company'
+		dataType: string
+		lineageTag: 30a0e07f-7a8f-4fa9-98ab-95d625319a1f
+		summarizeBy: none
+		sourceColumn: Sub Agent Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Price Increase Percent'
+		dataType: decimal
+		formatString: #,0.0
+		lineageTag: f298017e-b08f-444c-ba65-cf67666190c7
+		summarizeBy: none
+		sourceColumn: Price Increase Percent
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+	column 'Auto Price Increase Flag'
+		dataType: string
+		lineageTag: 8dac3386-349e-4263-b1bc-0992d23a04fb
+		summarizeBy: none
+		sourceColumn: Auto Price Increase Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column IBX
+		dataType: string
+		lineageTag: 97bbdd9f-d62b-4e3a-9c08-15bfa0e87ee4
+		summarizeBy: none
+		sourceColumn: IBX
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Agreement Line POF Name'
+		dataType: string
+		lineageTag: e925e942-4aca-4e75-9103-c9d3744392af
+		summarizeBy: none
+		sourceColumn: Billing Agreement Line POF Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Initial Term'
+		dataType: string
+		lineageTag: 7fbc3a55-832c-4293-85ef-6b4f6ddf29ab
+		summarizeBy: none
+		sourceColumn: Initial Term
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Renewal Term'
+		dataType: string
+		lineageTag: 12d495fd-f126-4c11-8c0c-28900b8f5be1
+		summarizeBy: none
+		sourceColumn: Renewal Term
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Notice Period'
+		dataType: string
+		lineageTag: 555e0973-63ab-4790-8afb-cccddd3446cc
+		summarizeBy: none
+		sourceColumn: Customer Notice Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column PriceIncreasePct2
+		dataType: string
+		lineageTag: ff802754-c067-4056-a60b-10bad0c5484d
+		summarizeBy: none
+		sourceColumn: PriceIncreasePct2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RenewalInput = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\RickShrum\Downloads\Renewal Data Report May 2026 Showing API and Renewal Details Not including Billing MRC or Tern End Date .xlsx"), null, true),
+				    #"Sheet 1_Sheet" = Source{[Item="Sheet 1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sheet 1_Sheet", [PromoteAllScalars=true]),
+				    #"Filled Down" = Table.FillDown(#"Promoted Headers",{"Billing Account Name", "Deal ID", "Billing Agreement Number", "Derived Opportunity Partner Name", "Opportunity Partner Sub Type", "Sub Agent Company", "Price Increase Percent"}),
+				    #"Added Custom" = Table.AddColumn(#"Filled Down", "PriceIncreasePct2", each [Price Increase Percent]),
+				    #"Sorted Rows" = Table.Sort(#"Added Custom",{{"Price Increase Percent", Order.Descending}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Sorted Rows","Price Index-IGPM",".1",Replacer.ReplaceText,{"Price Increase Percent"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Replaced Value1","Price Index",".1",Replacer.ReplaceText,{"Price Increase Percent"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"Price Increase Percent", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

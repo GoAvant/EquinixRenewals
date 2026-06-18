@@ -1,0 +1,250 @@
+{
+  "config": "{\"version\":\"5.66\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY22SU09\",\"type\":2,\"version\":{\"visual\":\"1.8.75\",\"report\":\"2.0.75\",\"page\":\"1.3.75\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"pauseQueries\":false,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "ReportSection4433a40a831b51baec65",
+      "config": "{\"acceptsFilterContext\":1}",
+      "name": "Pod",
+      "parameters": "[{\"name\":\"Param_Filter7746cd782eba233e90c0\",\"boundFilter\":\"Filter7746cd782eba233e90c0\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Order Code\"}}}]",
+      "type": 1
+    }
+  ],
+  "publicCustomVisuals": [],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY22SU09",
+            "path": "BaseThemes/CY22SU09.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Renewal Explore",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "353fdfb017bdbd0bb45e",
+      "ordinal": 3,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0921163cc066b657d7c9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":233.12280147029762,\"y\":563.6836488676337,\"z\":2000,\"width\":332.3821192838228,\"height\":155.71874629461286,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"RenewalInput.Sub Agent Company\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"RenewalInput\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Sub Agent Company\"},\"Name\":\"RenewalInput.Sub Agent Company\",\"NativeReferenceName\":\"Sub Agent Company\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}},\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{\"selfFilterEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"RenewalInput\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Sub Agent Company\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"''\"}}],[{\"Literal\":{\"Value\":\"'*'\"}}]]}}}}}]}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 155.72,
+          "width": 332.38,
+          "x": 233.12,
+          "y": 563.68,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"4a66ff0860c087ab7384\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.072956799737684,\"y\":564.0855807853103,\"z\":1000,\"width\":222.72426701642212,\"height\":155.57122168483755,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"RenewalInput.Customer Notice Period\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"RenewalInput\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Customer Notice Period\"},\"Name\":\"RenewalInput.Customer Notice Period\",\"NativeReferenceName\":\"Customer Notice Period\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"selfFilterEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 155.57,
+          "width": 222.72,
+          "x": 10.07,
+          "y": 564.09,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"d26bca46204394261b92\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.422255073242845,\"y\":44.037091788738074,\"z\":0,\"width\":1253.9561886843167,\"height\":519.6376831071093,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"RenewalInput.Sub Agent Company\",\"active\":true},{\"queryRef\":\"RenewalInput.Billing Account Name\",\"active\":true},{\"queryRef\":\"RenewalInput.Deal ID\",\"active\":true},{\"queryRef\":\"RenewalInput.Billing Agreement Number\",\"active\":true},{\"queryRef\":\"RenewalInput.Renewal Term\",\"active\":true},{\"queryRef\":\"RenewalInput.PriceIncreasePct2\",\"active\":true},{\"queryRef\":\"RenewalInput.Billing Agreement Line POF Name\",\"active\":true}],\"Values\":[{\"queryRef\":\"Min(RenewalInput.Initial Term)\"},{\"queryRef\":\"Sum(All Accounts.Term Length in Months)\"},{\"queryRef\":\"Min(All Accounts.Max renewal date)\"},{\"queryRef\":\"Min(All Accounts.Min Renewal date)\"},{\"queryRef\":\"Min(All Accounts.Billings.Contract End Date)\"},{\"queryRef\":\"Max(All Accounts.Billings.Contract End Date)\"},{\"queryRef\":\"Sum(RenewalInput.Price Increase Percent)\"},{\"queryRef\":\"Sum(All Accounts.Revenue Amount)\"},{\"queryRef\":\"Sum(All Accounts.Term Length in Months)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"RenewalInput\",\"Type\":0},{\"Name\":\"a\",\"Entity\":\"All Accounts\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Billing Account Name\"},\"Name\":\"RenewalInput.Billing Account Name\",\"NativeReferenceName\":\"Billing Account Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"PriceIncreasePct2\"},\"Name\":\"RenewalInput.PriceIncreasePct2\",\"NativeReferenceName\":\"PriceIncreasePct2\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Sub Agent Company\"},\"Name\":\"RenewalInput.Sub Agent Company\",\"NativeReferenceName\":\"Sub Agent Company\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Billing Agreement Number\"},\"Name\":\"RenewalInput.Billing Agreement Number\",\"NativeReferenceName\":\"Billing Agreement Number\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Max renewal date\"}},\"Function\":4},\"Name\":\"Min(All Accounts.Max renewal date)\",\"NativeReferenceName\":\"Latest Max renewal date\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Min Renewal date\"}},\"Function\":3},\"Name\":\"Min(All Accounts.Min Renewal date)\",\"NativeReferenceName\":\"Earliest Min Renewal date\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Billings.Contract End Date\"}},\"Function\":3},\"Name\":\"Min(All Accounts.Billings.Contract End Date)\",\"NativeReferenceName\":\"Earliest Billings.Contract End Date\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Billings.Contract End Date\"}},\"Function\":4},\"Name\":\"Max(All Accounts.Billings.Contract End Date)\",\"NativeReferenceName\":\"Latest Billings.Contract End Date\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Price Increase Percent\"}},\"Function\":4},\"Name\":\"Sum(RenewalInput.Price Increase Percent)\",\"NativeReferenceName\":\"Max of Price Increase Percent\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Deal ID\"},\"Name\":\"RenewalInput.Deal ID\",\"NativeReferenceName\":\"Deal ID\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Renewal Term\"},\"Name\":\"RenewalInput.Renewal Term\",\"NativeReferenceName\":\"Renewal Term\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Revenue Amount\"}},\"Function\":4},\"Name\":\"Sum(All Accounts.Revenue Amount)\",\"NativeReferenceName\":\"Max of Revenue Amount\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Term Length in Months\"}},\"Function\":4},\"Name\":\"Sum(All Accounts.Term Length in Months)\",\"NativeReferenceName\":\"Max of Term Length in Months1\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Initial Term\"}},\"Function\":4},\"Name\":\"Min(RenewalInput.Initial Term)\",\"NativeReferenceName\":\"Last Initial Term\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Billing Agreement Line POF Name\"},\"Name\":\"RenewalInput.Billing Agreement Line POF Name\",\"NativeReferenceName\":\"Billing Agreement Line POF Name\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Sub Agent Company\"}}}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"RenewalInput.Sub Agent Company\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"RenewalInput\"}},\"Property\":\"Sub Agent Company\"}}],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.Billing Account Name\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"RenewalInput\"}},\"Property\":\"Billing Account Name\"}}],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.Deal ID\"],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.Billing Agreement Number\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"RenewalInput\"}},\"Property\":\"Billing Agreement Number\"}}],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.Renewal Term\"],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.PriceIncreasePct2\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"RenewalInput\"}},\"Property\":\"PriceIncreasePct2\"}}],\"isPinned\":true},{\"queryRefs\":[\"RenewalInput.Billing Agreement Line POF Name\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"urlIcon\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"general\":[{\"properties\":{\"layout\":{\"expr\":{\"Literal\":{\"Value\":\"'Tabular'\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"129.68530318430618D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.Billing Account Name\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"97.20066096675744D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.Sub Agent Company\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"105.40393060125753D\"}}}},\"selector\":{\"metadata\":\"Sum(All Accounts.Term Length in Months)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"241.05537365098542D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.Billing Agreement Line POF Name\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"75.66392795940732D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.PriceIncreasePct2\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"68.32347056151102D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.Renewal Term\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"137.03837656395464D\"}}}},\"selector\":{\"metadata\":\"RenewalInput.Billing Agreement Number\"}}]}}}",
+          "filters": "[]",
+          "height": 519.64,
+          "width": 1253.96,
+          "x": 26.42,
+          "y": 44.04,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "All Accounts",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filter7746cd782eba233e90c0\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Order Code\"}},\"type\":\"Categorical\",\"howCreated\":5}]",
+      "height": 720.00,
+      "name": "ReportSection4433a40a831b51baec65",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"24bbc7c18198de5ccd2b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":2000,\"width\":1280,\"height\":70.62068965517241}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"All Known Accounts\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"28pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]}}}",
+          "filters": "[]",
+          "height": 70.62,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"3123285c01c5c47ce40e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1128.8442211055276,\"y\":4.824120603015075,\"z\":4000,\"width\":126.63316582914572,\"height\":48.24120603015075}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Refresh Date.Refresh Date)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Refresh Date\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3},\"Name\":\"Min(Refresh Date.Refresh Date)\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Refreshed as of:'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 48.24,
+          "width": 126.63,
+          "x": 1128.84,
+          "y": 4.82,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"448e560679a5b13ae9de\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":5000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"ac7945a6bcb073b60e24\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.088669950738916,\"y\":61.793103448275865,\"z\":1000,\"width\":1269.911330049261,\"height\":211.86206896551724}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"All Accounts.Channel Manager\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"All Accounts\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Channel Manager\"},\"Name\":\"All Accounts.Channel Manager\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter466bab04764a725ced90\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"_Partners.User.User_Profile_Name__c\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"e\",\"Entity\":\"Known Accounts\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"_Partners.User.User_Profile_Name__c\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}},{\"name\":\"Filter5b295c1707c1b64a1c08\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Channel Manager\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"All Accounts\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Channel Manager\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 211.86,
+          "width": 1269.91,
+          "x": 10.09,
+          "y": 61.79,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"b6cd167d8ccee9cc4bbc\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.088669950738916,\"y\":273.6551724137931,\"z\":0,\"width\":1269.911330049261,\"height\":402.2857142857143}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"All Accounts.Billings.Agency\"},{\"queryRef\":\"All Accounts.Billings.Customer Names\"},{\"queryRef\":\"All Accounts.Channel Manager\"},{\"queryRef\":\"All Accounts.ICM\"},{\"queryRef\":\"All Accounts.Commission End Date\"},{\"queryRef\":\"All Accounts.Min Renewal date\"},{\"queryRef\":\"All Accounts.Max renewal date\"},{\"queryRef\":\"All Accounts.Order Code\"},{\"queryRef\":\"All Accounts.IBX\"},{\"queryRef\":\"All Accounts.Item Code\"},{\"queryRef\":\"All Accounts.Revenue Amount\"},{\"queryRef\":\"All Accounts.Revenue Type\"},{\"queryRef\":\"All Accounts.Representative\"},{\"queryRef\":\"All Accounts.Billings.Account\"},{\"queryRef\":\"All Accounts._SFLink\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"All Accounts\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Channel Manager\"},\"Name\":\"All Accounts.Channel Manager\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"ICM\"},\"Name\":\"All Accounts.ICM\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Commission End Date\"},\"Name\":\"All Accounts.Commission End Date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Min Renewal date\"},\"Name\":\"All Accounts.Min Renewal date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Max renewal date\"},\"Name\":\"All Accounts.Max renewal date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"IBX\"},\"Name\":\"All Accounts.IBX\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Item Code\"},\"Name\":\"All Accounts.Item Code\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Revenue Type\"},\"Name\":\"All Accounts.Revenue Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Representative\"},\"Name\":\"All Accounts.Representative\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Billings.Agency\"},\"Name\":\"All Accounts.Billings.Agency\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Billings.Customer Names\"},\"Name\":\"All Accounts.Billings.Customer Names\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Revenue Amount\"},\"Name\":\"All Accounts.Revenue Amount\",\"NativeReferenceName\":\"Revenue Amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Billings.Account\"},\"Name\":\"All Accounts.Billings.Account\",\"NativeReferenceName\":\"Billings.Account\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"_SFLink\"},\"Name\":\"All Accounts._SFLink\",\"NativeReferenceName\":\"Opp Link\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Order Code\"},\"Name\":\"All Accounts.Order Code\",\"NativeReferenceName\":\"Order Code1\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Commission End Date\"}}}]},\"columnProperties\":{\"All Accounts.Billings.Agency\":{\"displayName\":\"Partner\"},\"All Accounts.Billings.Customer Names\":{\"displayName\":\"Customer\"},\"All Accounts._SFLink\":{\"displayName\":\"Opp Link\"}},\"drillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"objects\":{}}}",
+          "filters": "[{\"name\":\"Filter9b6fc7a5250ebdac04ac\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Channel Manager\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"All Accounts\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Channel Manager\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false,\"ordinal\":0},{\"name\":\"Filterc186baff8cba05e15be5\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"ICM\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":1},{\"name\":\"Filtercae5df78ee4844a625ed\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Commission End Date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":2},{\"name\":\"Filter0801acef57ba5501a40c\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Min Renewal date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":3},{\"name\":\"Filter9b664b1b57618a6068a9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Max renewal date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":4},{\"name\":\"Filter88296bd0071730db0b7e\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Order Code\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false,\"ordinal\":5},{\"name\":\"Filter3eb88dca05d6ec604002\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"IBX\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":6},{\"name\":\"Filtera456731070b307e0657b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Item Code\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":7},{\"name\":\"Filter6e62c38840202c8d91c6\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Revenue Type\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":8},{\"name\":\"Filterf57d225bc0406242e276\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Representative\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":9},{\"name\":\"Filter0bf3cf38065ae0d42ec0\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Billings.Agency\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":10},{\"name\":\"Filterbb7a271c0e1426b3194e\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"All Accounts\"}},\"Property\":\"Billings.Customer Names\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":11}]",
+          "height": 402.29,
+          "width": 1269.91,
+          "x": 10.09,
+          "y": 273.66,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"dd7eefa79abd49a4abcd\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":35.310344827586206,\"z\":3000,\"width\":1280,\"height\":42.87684729064039}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'line'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"lineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}]}}}",
+          "filters": "[]",
+          "height": 42.88,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 35.31,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Accounts - Renewal",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectione53f754d50c04903b2a0",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"18a8d6a0d5d37d2045d4\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1128.8442211055276,\"y\":4.824120603015075,\"z\":4000,\"width\":126.63316582914572,\"height\":48.24120603015075}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Refresh Date.Refresh Date)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Refresh Date\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3},\"Name\":\"Min(Refresh Date.Refresh Date)\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Refreshed as of:'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 48.24,
+          "width": 126.63,
+          "x": 1128.84,
+          "y": 4.82,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"2929eb575f26b566601b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":5000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"55d3fef7b366b0189865\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":35.310344827586206,\"z\":3000,\"width\":1280,\"height\":42.87684729064039}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'line'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"lineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}]}}}",
+          "filters": "[]",
+          "height": 42.88,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 35.31,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"9eae6de82739d08c6d53\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.088669950738916,\"y\":61.793103448275865,\"z\":1000,\"width\":1269.911330049261,\"height\":211.86206896551724}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Equinix_Data._Partners.User.Name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"e\",\"Entity\":\"Known Accounts\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Channel Manager\"},\"Name\":\"Equinix_Data._Partners.User.Name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter466bab04764a725ced90\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"_Partners.User.User_Profile_Name__c\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"e\",\"Entity\":\"Known Accounts\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"_Partners.User.User_Profile_Name__c\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}]",
+          "height": 211.86,
+          "width": 1269.91,
+          "x": 10.09,
+          "y": 61.79,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"a6d26592cd0868aada82\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":2000,\"width\":1280,\"height\":70.62068965517241}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Known Accounts\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"28pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]}}}",
+          "filters": "[]",
+          "height": 70.62,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"c7072ebd098d5eda8803\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.605521030503024,\"y\":273.07124072430025,\"z\":0,\"width\":1270.6732106065429,\"height\":403.431883281127}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Known Accounts.Billings.Agency\"},{\"queryRef\":\"Known Accounts.Billings.Customer Names\"},{\"queryRef\":\"Equinix_Data._Partners.User.Name\"},{\"queryRef\":\"Known Accounts.ICM\"},{\"queryRef\":\"Equinix_Data.Commission End Date\"},{\"queryRef\":\"Equinix_Data.Min Renewal date\"},{\"queryRef\":\"Equinix_Data.Max renewal date\"},{\"queryRef\":\"Equinix_Data.Order Code\"},{\"queryRef\":\"Equinix_Data.IBX\"},{\"queryRef\":\"Equinix_Data.Revenue Type\"},{\"queryRef\":\"Equinix_Data.Representative\"},{\"queryRef\":\"Known Accounts.Billings.Account\"},{\"queryRef\":\"Known Accounts._SFLink\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"e\",\"Entity\":\"Known Accounts\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Commission End Date\"},\"Name\":\"Equinix_Data.Commission End Date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Min Renewal date\"},\"Name\":\"Equinix_Data.Min Renewal date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Max renewal date\"},\"Name\":\"Equinix_Data.Max renewal date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Order Code\"},\"Name\":\"Equinix_Data.Order Code\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"IBX\"},\"Name\":\"Equinix_Data.IBX\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Revenue Type\"},\"Name\":\"Equinix_Data.Revenue Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Representative\"},\"Name\":\"Equinix_Data.Representative\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Channel Manager\"},\"Name\":\"Equinix_Data._Partners.User.Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"ICM\"},\"Name\":\"Known Accounts.ICM\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Billings.Agency\"},\"Name\":\"Known Accounts.Billings.Agency\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Billings.Customer Names\"},\"Name\":\"Known Accounts.Billings.Customer Names\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"Billings.Account\"},\"Name\":\"Known Accounts.Billings.Account\",\"NativeReferenceName\":\"Billings.Account\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"e\"}},\"Property\":\"_SFLink\"},\"Name\":\"Known Accounts._SFLink\",\"NativeReferenceName\":\"Opp Link\"}]},\"columnProperties\":{\"Equinix_Data._Partners.User.Name\":{\"displayName\":\"Channel Manager\"},\"Known Accounts.Billings.Agency\":{\"displayName\":\"Partner\"},\"Known Accounts.Billings.Customer Names\":{\"displayName\":\"Customer\"},\"Known Accounts._SFLink\":{\"displayName\":\"Opp Link\"}},\"drillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"143.61808899775315D\"}}}},\"selector\":{\"metadata\":\"Equinix_Data.Commission End Date\"}}]}}}",
+          "filters": "[{\"name\":\"Filtera0e1f9b3a844b0bdc505\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Channel Manager\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"k\",\"Entity\":\"Known Accounts\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"k\"}},\"Property\":\"Channel Manager\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false,\"ordinal\":0},{\"name\":\"Filterc8744f57db0928b4e203\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Commission End Date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":1},{\"name\":\"Filter65be20e3a9ba94679374\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"IBX\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":2},{\"name\":\"Filter754339d8b90808740c52\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Item Code\"}},\"type\":\"Categorical\",\"howCreated\":1,\"isHiddenInViewMode\":false,\"ordinal\":3},{\"name\":\"Filterfad7be8600d7824767eb\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Max renewal date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":4},{\"name\":\"Filter44c7ebcb2ae9878b8a46\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Min Renewal date\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":5},{\"name\":\"Filteraffb854135a8307e32b9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Order Code\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false,\"ordinal\":6},{\"name\":\"Filter89a32746160c6330d064\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Representative\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":7},{\"name\":\"Filter4c466b023e940043a554\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Revenue Type\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":8},{\"name\":\"Filterf2d6aea5c22a821da083\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"ICM\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":9},{\"name\":\"Filterc0315c601dc0120c4240\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Billings.Agency\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":10},{\"name\":\"Filter6ad08ba62536005ea6c9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Known Accounts\"}},\"Property\":\"Billings.Customer Names\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{}}]},\"isHiddenInViewMode\":false,\"ordinal\":11}]",
+          "height": 403.43,
+          "width": 1270.67,
+          "x": 9.61,
+          "y": 273.07,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Unknown End Dates",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectionec3a45ab6245168e0820",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0139c3deb33d3d51c219\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.088669950738916,\"y\":70.62068965517241,\"z\":0,\"width\":1269.911330049261,\"height\":649.4581280788177}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Unknown Accounts.Commission End Date\"},{\"queryRef\":\"Unknown End Dates.Billings.Agency\"},{\"queryRef\":\"Unknown End Dates.Billings.Rep\"},{\"queryRef\":\"Unknown End Dates.Billings.Contract End Date\"},{\"queryRef\":\"Unknown Accounts.Customer Name\"},{\"queryRef\":\"Unknown Accounts.IBX\"},{\"queryRef\":\"Unknown Accounts.Item Code\"},{\"queryRef\":\"Unknown Accounts.Order Code\"},{\"queryRef\":\"Unknown Accounts.Revenue Amount\"},{\"queryRef\":\"Unknown Accounts.Revenue Type\"},{\"queryRef\":\"Unknown Accounts.Term Length in Months\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"u\",\"Entity\":\"Unknown End Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Commission End Date\"},\"Name\":\"Unknown Accounts.Commission End Date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Customer Name\"},\"Name\":\"Unknown Accounts.Customer Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"IBX\"},\"Name\":\"Unknown Accounts.IBX\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Item Code\"},\"Name\":\"Unknown Accounts.Item Code\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Order Code\"},\"Name\":\"Unknown Accounts.Order Code\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Revenue Type\"},\"Name\":\"Unknown Accounts.Revenue Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Term Length in Months\"},\"Name\":\"Unknown Accounts.Term Length in Months\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Revenue Amount\"}},\"Function\":0},\"Name\":\"Unknown Accounts.Revenue Amount\",\"NativeReferenceName\":\"Sum of Revenue Amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Billings.Agency\"},\"Name\":\"Unknown End Dates.Billings.Agency\",\"NativeReferenceName\":\"Billings.Agency\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Billings.Rep\"},\"Name\":\"Unknown End Dates.Billings.Rep\",\"NativeReferenceName\":\"Billings.Rep\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Billings.Contract End Date\"},\"Name\":\"Unknown End Dates.Billings.Contract End Date\",\"NativeReferenceName\":\"Billings.Contract End Date\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Commission End Date\"}}}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 649.46,
+          "width": 1269.91,
+          "x": 10.09,
+          "y": 70.62,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"1476d6e7a512131265a9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":35.310344827586206,\"z\":2000,\"width\":1280,\"height\":42.87684729064039}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'line'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"lineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}}]}}}",
+          "filters": "[]",
+          "height": 42.88,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 35.31,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"8f3f784b56c42060e7d5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":1280,\"height\":70.62068965517241}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Unknown End Dates\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"28pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]}}}",
+          "filters": "[]",
+          "height": 70.62,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"b08d2d959da134eb0395\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1128.8442211055276,\"y\":4.824120603015075,\"z\":3000,\"width\":126.63316582914572,\"height\":48.24120603015075}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Refresh Date.Refresh Date)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Refresh Date\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3},\"Name\":\"Min(Refresh Date.Refresh Date)\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Refresh Date\"}},\"Function\":3}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Refreshed as of:'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 48.24,
+          "width": 126.63,
+          "x": 1128.84,
+          "y": 4.82,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

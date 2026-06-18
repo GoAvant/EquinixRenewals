@@ -1,0 +1,286 @@
+table 'All Accounts'
+	lineageTag: da23adee-b0b9-41f5-9ea1-9e6dec9ee87c
+
+	column 'Month Commissions Earned'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4caa1abf-23ea-41c1-a255-78cd5221ebdc
+		summarizeBy: none
+		sourceColumn: Month Commissions Earned
+
+		variation Variation
+			isDefault
+			relationship: bada324c-85f1-44e2-8b1b-ea43218ac214
+			defaultHierarchy: LocalDateTable_54339def-4b51-4a44-bc72-c3593523db0b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: f3770a8a-9f8b-4723-af19-4b7f5b3460d3
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Code'
+		dataType: string
+		lineageTag: 3a00e2d2-ed95-40b4-a9a9-61ef0f880166
+		summarizeBy: none
+		sourceColumn: Order Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item Code'
+		dataType: string
+		lineageTag: ae643222-a0b4-4afc-a245-fe17cdb09f23
+		summarizeBy: none
+		sourceColumn: Item Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column IBX
+		dataType: string
+		lineageTag: 40ae6332-de85-4e57-a4f9-1ce5cdd09016
+		summarizeBy: none
+		sourceColumn: IBX
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Type'
+		dataType: string
+		lineageTag: a37f444a-979b-4f2b-bda5-4b5664c3686e
+		summarizeBy: none
+		sourceColumn: Revenue Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commission End Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 54daf0d8-6019-41f2-97a8-3a553243cac5
+		summarizeBy: none
+		sourceColumn: Commission End Date
+
+		variation Variation
+			isDefault
+			relationship: d7f2d3fa-de86-45d5-9293-fd1002b455a5
+			defaultHierarchy: LocalDateTable_2d736262-68b3-4b32-ac74-b125c6f27661.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Term Length in Months'
+		dataType: int64
+		formatString: 0
+		lineageTag: 13cfd50d-3f71-4a50-8d4a-abff1d4a9fba
+		summarizeBy: sum
+		sourceColumn: Term Length in Months
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Amount'
+		dataType: double
+		lineageTag: e72ce229-69d2-4bfb-80b1-1e9927d14b41
+		summarizeBy: sum
+		sourceColumn: Revenue Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sub Agent Company (Only populated FEB-2018 Forward)'
+		dataType: string
+		lineageTag: dd2086d0-047d-4e9b-a77a-465d655491bf
+		summarizeBy: none
+		sourceColumn: Sub Agent Company (Only populated FEB-2018 Forward)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Representative
+		dataType: string
+		lineageTag: 6fd99406-7a3c-423c-8880-c6f594159c7c
+		summarizeBy: none
+		sourceColumn: Representative
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Max renewal date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e92d5f00-339e-47c6-8452-565f2820c4ab
+		summarizeBy: none
+		sourceColumn: Max renewal date
+
+		variation Variation
+			isDefault
+			relationship: 4345ab51-0dd8-4610-bca6-425c2b29c45b
+			defaultHierarchy: LocalDateTable_7ebdf740-914d-4cd2-b5bf-992310c89a40.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Min Renewal date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7b408fa7-8856-4aee-ba01-727b9c5acd88
+		summarizeBy: none
+		sourceColumn: Min Renewal date
+
+		variation Variation
+			isDefault
+			relationship: c45e05df-6464-4f8a-9a1e-a3ec55e3e0ae
+			defaultHierarchy: LocalDateTable_ac0cd511-980b-485a-986f-099acbafab3f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column NewOrderCode
+		dataType: string
+		lineageTag: d1819bd5-e1a9-4974-ac43-34cb8a1d7d50
+		summarizeBy: none
+		sourceColumn: NewOrderCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Agency'
+		dataType: string
+		lineageTag: 4fa2a11c-1b92-4d97-b711-6874b416b151
+		summarizeBy: none
+		sourceColumn: Billings.Agency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Account'
+		dataType: string
+		lineageTag: cdd6ad93-16ac-45e5-b798-33b656ee468e
+		summarizeBy: none
+		sourceColumn: Billings.Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Seller Id'
+		dataType: string
+		lineageTag: cbb09196-98a8-489f-aa4f-e0da2e713221
+		summarizeBy: none
+		sourceColumn: Billings.Seller Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Customer Names'
+		dataType: string
+		lineageTag: a1302ef1-7b3b-42bc-9094-348b09b82ab9
+		summarizeBy: none
+		sourceColumn: Billings.Customer Names
+
+		annotation SummarizationSetBy = Automatic
+
+	column ICM
+		dataType: string
+		lineageTag: 77e04cbb-7786-4b43-9ae6-8442b603ed1e
+		summarizeBy: none
+		sourceColumn: ICM
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Channel Manager'
+		dataType: string
+		lineageTag: 3365437e-011f-4cf8-a711-dd17afec2b21
+		summarizeBy: none
+		sourceColumn: Channel Manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Partners.User.User_Profile_Name__c'
+		dataType: string
+		lineageTag: 5983c4e7-66a8-4eed-920c-34f9dadcc91e
+		summarizeBy: none
+		sourceColumn: _Partners.User.User_Profile_Name__c
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bookings (SalesForce).Id'
+		dataType: string
+		lineageTag: 67603c39-cfb4-4301-bdf3-a3c2ad8b4b33
+		summarizeBy: none
+		sourceColumn: Bookings (SalesForce).Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bookings (SalesForce).RPM_Account_Number__c Original'
+		dataType: string
+		lineageTag: cc618184-8faf-420d-9764-0732cbdfd2ed
+		summarizeBy: none
+		sourceColumn: Bookings (SalesForce).RPM_Account_Number__c Original
+
+		annotation SummarizationSetBy = Automatic
+
+	column _SFLink = ```
+			
+			    IF('All Accounts'[Bookings (SalesForce).Id] <> BLANK(),
+			        "https://goavant.lightning.force.com/lightning/r/Opportunity/" & 'All Accounts'[Bookings (SalesForce).Id] & "/view",
+			        ""
+			    )
+			```
+		lineageTag: d8086542-48b3-45c8-864e-43e129d6c34a
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Contract End Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 281fff15-0e07-425d-8056-5c101b38048c
+		summarizeBy: none
+		sourceColumn: Billings.Contract End Date
+
+		variation Variation
+			isDefault
+			relationship: 09c5562f-9de6-484c-aa99-be2aa7923586
+			defaultHierarchy: LocalDateTable_0eccc50a-3f61-46e8-9a97-87ea0c284d06.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'All Accounts' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://avantcommunications1-my.sharepoint.com/personal/jochoa_goavant_net/Documents/PowerBI/Renewals/Equinix/Xactly Exports/Equinix Renewal.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Removed Top Rows" = Table.Skip(#"Promoted Headers",1),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Top Rows",{{"Month Commissions Earned", type date}, {"Invoice Date", type date}, {"Payee Name", type text}, {"Customer Name", type text}, {"Order Code", type text}, {"Item Code", type text}, {"IBX", type text}, {"Revenue Type", type text}, {"Commission End Date", type text}, {"Term Length in Months", Int64.Type}, {"Revenue Currency", type text}, {"Revenue Amount", type number}, {"Commission Rate", type number}, {"Is Held", type text}, {"Commissions Held/Not Paid", Int64.Type}, {"Commissions Released/Paid", type number}, {"Commission Currency", type text}, {"Payment/Release Date", type date}, {"Earning Group Name", type text}, {"Sub Agent Company (Only populated FEB-2018 Forward)", type text}, {"Sub Agent First Name (Only populated FEB-2018 Forward)", type text}, {"Sub Agent Last Name (Only populated FEB-2018 Forward)", type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type1", {"Order Code"}, Billings, {"Account - Original"}, "Billings", JoinKind.LeftOuter),
+				    #"Expanded Billings" = Table.ExpandTableColumn(#"Merged Queries", "Billings", {"Agency", "Account - Original", "Seller Id", "Customer Names", "Contract End Date"}, {"Billings.Agency", "Billings.Account", "Billings.Seller Id", "Billings.Customer Names", "Billings.Contract End Date"}),
+				    #"Update Comm Date" = Table.ReplaceValue(#"Expanded Billings", null, each [Billings.Contract End Date], Replacer.ReplaceValue, {"Commission End Date"}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Update Comm Date", each ([Commission End Date] <> null)),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows1",{"Month Commissions Earned", "Customer Name", "Order Code", "Item Code", "IBX", "Revenue Type", "Commission End Date", "Term Length in Months", "Revenue Amount", "Sub Agent Company (Only populated FEB-2018 Forward)", "Sub Agent First Name (Only populated FEB-2018 Forward)", "Sub Agent Last Name (Only populated FEB-2018 Forward)", "Billings.Agency", "Billings.Account", "Billings.Seller Id", "Billings.Customer Names", "Billings.Contract End Date"}),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Commission End Date", type date}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type4", "Max renewal date", each Date.AddDays([Commission End Date], -60)),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom",{{"Max renewal date", type date}}),
+				    #"Added Custom1" = Table.AddColumn(#"Changed Type2", "Min Renewal date", each Date.AddDays([Commission End Date], -120)),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom1",{{"Min Renewal date", type date}}),
+				    #"Merged Columns" = Table.CombineColumns(#"Changed Type3",{"Sub Agent First Name (Only populated FEB-2018 Forward)", "Sub Agent Last Name (Only populated FEB-2018 Forward)"},Combiner.CombineTextByDelimiter(" ", QuoteStyle.None),"Representative"),
+				    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Merged Columns", "Text Before Delimiter", each Text.BeforeDelimiter([#"Order Code"], "-", 1), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text Before Delimiter",{{"Text Before Delimiter", "NewOrderCode"}}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns", {"Billings.Seller Id"}, _Partners, {"Id"}, "_Partners", JoinKind.LeftOuter),
+				    #"Expanded _Partners" = Table.ExpandTableColumn(#"Merged Queries1", "_Partners", {"ICM", "User.Name", "User.User_Profile_Name__c"}, {"_Partners.ICM", "_Partners.User.Name", "_Partners.User.User_Profile_Name__c"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Expanded _Partners",{{"_Partners.ICM", "ICM"}, {"_Partners.User.Name", "Channel Manager"}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns1", each [Billings.Customer Names] <> ""),
+				    #"Merged Queries2" = Table.NestedJoin(#"Renamed Columns1", {"Billings.Account"}, #"Bookings (SalesForce)", {"RPM_Account_Number__c Original"}, "Bookings (SalesForce)", JoinKind.LeftOuter),
+				    #"Expanded Bookings (SalesForce)" = Table.ExpandTableColumn(#"Merged Queries2", "Bookings (SalesForce)", {"Id", "RPM_Account_Number__c Original"}, {"Bookings (SalesForce).Id", "Bookings (SalesForce).RPM_Account_Number__c Original"})
+				in
+				    #"Expanded Bookings (SalesForce)"
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

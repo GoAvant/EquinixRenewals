@@ -1,0 +1,328 @@
+expression 'To Horizon (Date)' = #date(2026, 11, 30) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: a7c4911a-3587-4337-b9fa-90e2b75a7d2c
+
+	annotation PBI_ResultType = Date
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'From (Date)' = #date(2026, 6, 1) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: baef0033-1c41-4f32-b523-5a97f48ca44a
+
+	annotation PBI_ResultType = Date
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression User =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    User1 = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="User"]}[Data]
+		in
+		    User1
+	lineageTag: 31c5b01f-33ec-459d-a7f5-4783bf5044e4
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression _Partners =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    Accounts = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="Accounts"]}[Data],
+		    #"Filtered Rows" = Table.SelectRows(Accounts, each ([RecordTypeId] = "012600000001GagAAE")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Id", "AccountName", "Avant_ICM__c", "Avant_Account_Manager__c"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"Avant_Account_Manager__c"}, User, {"Id"}, "User", JoinKind.LeftOuter),
+		    #"Expanded User" = Table.ExpandTableColumn(#"Merged Queries", "User", {"Name", "User_Profile_Name__c"}, {"User.Name", "User.User_Profile_Name__c"}),
+		    #"Merged Queries1" = Table.NestedJoin(#"Expanded User", {"Avant_ICM__c"}, User, {"Id"}, "User", JoinKind.LeftOuter),
+		    #"Expanded User1" = Table.ExpandTableColumn(#"Merged Queries1", "User", {"Name"}, {"User.Name.1"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded User1",{{"User.Name.1", "ICM"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: af0aef14-77ed-4a97-ad16-01c101de1bd3
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Calendar (2)' = ```
+		let
+		    /*
+		    ****This Calendar was created and provided by Avi Singh****
+		    ****This can be freely shared as long as this text comment is retained.****
+		    http://www.youtube.com/PowerBIPro
+		    www.LearnPowerBI.com by Avi Singh
+		    */
+		    #"LearnPowerBI.com by Avi Singh" = 1,
+		    StartDate = #date(2009, 1, 1),
+		    FiscalYearEndMonth = 3,
+		    EndDate = Date.AddMonths(Date.EndOfYear(DateTime.Date(DateTime.FixedLocalNow())),FiscalYearEndMonth) /*was "#date(2017, 1, 1)" Updated on 201802027: hard Coded End of Year caused some formulas to break, switching to dynamic date*/,
+		    //Used for 'Offset' Column calculations, you may Hard code CurrentDate for testing e.g. #date(2017,9,1)
+		    CurrentDate = DateTime.Date(DateTime.FixedLocalNow()),
+		    // Specify the last month in your Fiscal Year, e.g. if June is the last month of your Fiscal Year, specify 6
+		
+		    #"==SET PARAMETERS ABOVE==" = 1,
+		    #"==Build Date Column==" = #"==SET PARAMETERS ABOVE==",
+		    ListDates = List.Dates(StartDate, Number.From(EndDate - StartDate)+1, #duration(1,0,0,0)),
+		    #"Converted to Table" = Table.FromList(ListDates, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Renamed Columns as Date" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Date"}}),
+		    // As far as Power BI is concerned, the 'Date' column is all that is needed :-) But we will continue and add a few Human-Friendly Columns
+		    #"Changed Type to Date" = Table.TransformColumnTypes(#"Renamed Columns as Date",{{"Date", type date}}),
+		    #"==Add Calendar Columns==" = #"Changed Type to Date",
+		    #"Added Calendar MonthNum" = Table.AddColumn(#"==Add Calendar Columns==", "MonthNum", each Date.Month([Date]), Int64.Type),
+		    #"Added Month Name" = Table.AddColumn(#"Added Calendar MonthNum", "Month", each Text.Start(Date.MonthName([Date]),3), type text),
+		    #"Added Month Name Long" = Table.AddColumn(#"Added Month Name", "MonthLong", each Date.MonthName([Date]), type text),
+		    #"Added Calendar Quarter" = Table.AddColumn(#"Added Month Name Long", "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date]))),
+		    #"Added Calendar Year" = Table.AddColumn(#"Added Calendar Quarter", "Year", each Date.Year([Date]), Int64.Type),
+		    #"Added Custom" = Table.AddColumn(#"Added Calendar Year", "Start Date of Week", each Date.StartOfWeek([Date])),
+		    #"==Add Fiscal Calendar Columns==" = #"Added Custom",
+		    #"Added FiscalMonthNum" = Table.AddColumn(#"==Add Fiscal Calendar Columns==", "FiscalMonthNum", each if [MonthNum] > FiscalYearEndMonth
+		then [MonthNum] - FiscalYearEndMonth
+		else [MonthNum] + (12 - FiscalYearEndMonth), type number),
+		    #"Added FiscalMonth Name" = Table.AddColumn(#"Added FiscalMonthNum", "FiscalMonth", each [Month]),
+		    #"Added FiscalMonth Name Long" = Table.AddColumn(#"Added FiscalMonth Name", "FiscalMonthLong", each [MonthLong]),
+		    #"Added FiscalQuarter" = Table.AddColumn(#"Added FiscalMonth Name Long", "FiscalQuarter", each "FQ" & Text.From(Number.RoundUp([FiscalMonthNum] / 3,0))),
+		    #"Added FiscalYear" = Table.AddColumn(#"Added FiscalQuarter", "FiscalYear", each "FY" & 
+		Text.End(
+		  Text.From(
+		    if [MonthNum] > FiscalYearEndMonth
+		    then [Year] + 1
+		    else [Year]
+		  )
+		  , 2
+		)),
+		
+		    #"==Add Calendar Date Offset Columns==" = #"Added FiscalYear",
+		    // Can be used to for example to show the past 3 months(CurMonthOffset = 0, -1, -2)
+		    #"Added CurMonthOffset" = Table.AddColumn(#"==Add Calendar Date Offset Columns==", "CurMonthOffset", each ( Date.Year([Date]) - Date.Year(CurrentDate) ) * 12
+		+ Date.Month([Date]) - Date.Month(CurrentDate), Int64.Type),
+		    // Can be used to for example to show the past 3 quarters (CurQuarterOffset = 0, -1, -2)
+		    #"Added CurQuarterOffset" = Table.AddColumn(#"Added CurMonthOffset", "CurQuarterOffset", each /*Year Difference*/
+		       ( Date.Year([Date]) - Date.Year(CurrentDate) )*4
+		       /*Quarter Difference*/
+		      + Number.RoundUp(Date.Month([Date]) / 3) 
+		      - Number.RoundUp(Date.Month(CurrentDate) / 3),
+		Int64.Type),
+		    // Can be used to for example to show the past 3 years (CurYearOffset = 0, -1, -2)
+		    #"Added CurYearOffset" = Table.AddColumn(#"Added CurQuarterOffset", "CurYearOffset", each Date.Year([Date]) - Date.Year(CurrentDate), Int64.Type),
+		    // Can be used to for example filter out all future dates
+		    #"Added FutureDate Flag" = Table.AddColumn(#"Added CurYearOffset", "FutureDate", each if [Date] > CurrentDate then "Future" else "Past" ),
+		    // FiscalYearOffset is the only Offset that is different.
+		    // FiscalQuarterOffset = is same as CurQuarterOffset
+		    // FiscalMonthOffset = is same as CurMonthOffset
+		    #"==Add FiscalYearOffset==" = #"Added FutureDate Flag",
+		    #"Filtered Rows to CurrentDate" = Table.SelectRows(#"==Add FiscalYearOffset==", each ([Date] = CurrentDate)),
+		    CurrentFiscalYear = #"Filtered Rows to CurrentDate"{0}[FiscalYear],
+		    #"Continue...Orig Table" = #"==Add FiscalYearOffset==",
+		    #"Added CurFiscalYearOffset" = Table.AddColumn(#"Continue...Orig Table", "CurFiscalYearOffset", each Number.From(Text.Range([FiscalYear],2,2)) - 
+		Number.From(Text.Range(CurrentFiscalYear,2,2))
+		/*Extract the numerical portion, e.g. FY18 = 18*/),
+		    #"==Add General Columns==" = #"Added CurFiscalYearOffset",
+		    // Used as 'Sort by Column' for MonthYear columns
+		    #"Added MonthYearNum" = Table.AddColumn(#"==Add General Columns==", "MonthYearNum", each [Year]*100 + [MonthNum] /*e.g. Sep-2016 would become 201609*/, Int64.Type),
+		    #"Added MonthYear" = Table.AddColumn(#"Added MonthYearNum", "MonthYear", each [Month] & "-" & Text.End(Text.From([Year]),2)),
+		    #"Added MonthYearLong" = Table.AddColumn(#"Added MonthYear", "MonthYearLong", each [Month] & "-" & Text.From([Year])),
+		    #"Added WeekdayNum" = Table.AddColumn(#"Added MonthYearLong", "WeekdayNum", each Date.DayOfWeek([Date]), Int64.Type),
+		    #"Added Weekday Name" = Table.AddColumn(#"Added WeekdayNum", "Weekday", each Text.Start(Date.DayOfWeekName([Date]),3), type text),
+		    #"Added WeekdayWeekend" = Table.AddColumn(#"Added Weekday Name", "WeekdayWeekend", each if [WeekdayNum] = 0 or [WeekdayNum] = 6
+		then "Weekend"
+		else "Weekday"),
+		    #"==Improve Ultimate Table" = #"Added WeekdayWeekend",
+		    #"----Add WeekSequenceNum----" = #"==Improve Ultimate Table",
+		    #"Filtered Rows Sundays Only (Start of Week)" = Table.SelectRows(#"----Add WeekSequenceNum----", each ([WeekdayNum] = 0)),
+		    #"Added Index WeekSequenceNum" = Table.AddIndexColumn(#"Filtered Rows Sundays Only (Start of Week)", "WeekSequenceNum", 2, 1),
+		    #"Merged Queries Ultimate Table to WeekSequenceNum" = Table.NestedJoin(#"==Improve Ultimate Table",{"Date"},#"Added Index WeekSequenceNum",{"Date"},"Added Index WeekNum",JoinKind.LeftOuter),
+		    #"Expanded Added Index WeekNum" = Table.ExpandTableColumn(#"Merged Queries Ultimate Table to WeekSequenceNum", "Added Index WeekNum", {"WeekSequenceNum"}, {"WeekSequenceNum"}),
+		    // somehow it ends up being unsorted after Expand Column, should not matter for the end table, but makes it harder to debug and check everything is correct. Thus sorting it.
+		    #"ReSorted Rows by Date" = Table.Sort(#"Expanded Added Index WeekNum",{{"Date", Order.Ascending}}),
+		    #"Filled Down WeekSequenceNum" = Table.FillDown(#"ReSorted Rows by Date",{"WeekSequenceNum"}),
+		    #"Replaced Value WeekSequenceNum null with 1" = Table.ReplaceValue(#"Filled Down WeekSequenceNum",null,1,Replacer.ReplaceValue,{"WeekSequenceNum"}),
+		    #"----WeekSequenceNum Complete----" = #"Replaced Value WeekSequenceNum null with 1",
+		    Current_WeekSequenceNum = #"----WeekSequenceNum Complete----"{[Date = CurrentDate]}?[WeekSequenceNum],
+		    #"Added Custom CurWeekOffset" = Table.AddColumn(#"----WeekSequenceNum Complete----", "CurWeekOffset", each [WeekSequenceNum] - Current_WeekSequenceNum, Int64.Type),
+		    #"Added Custom WeekNumber" = Table.AddColumn(#"Added Custom CurWeekOffset", "WeekNumber", each Date.WeekOfYear([Date], Day.Sunday)),
+		    #"Changed Type to WholeNumber" = Table.TransformColumnTypes(#"Added Custom WeekNumber",{{"WeekNumber", Int64.Type}}),
+		    #"Inserted Replaced Text" = Table.AddColumn(#"Changed Type to WholeNumber", "Replaced Text", each Text.Replace([FiscalYear], "FY", "20"), type text),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Inserted Replaced Text",{{"Replaced Text", Int64.Type}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Replaced Text", "FYNumber"}}),
+		    #"AddedFiscalWeek" = Table.AddColumn(#"Renamed Columns", "FiscalWeek", each if [WeekNumber] < Date.WeekOfYear(#date([FYNumber], 4, 1))
+		then [WeekNumber] + 53 - Date.WeekOfYear(#date([FYNumber], 4, 1)) + 1
+		else [WeekNumber] - Date.WeekOfYear(#date([FYNumber], 4, 1)) + 1, Int64.Type),
+		    #"Removed Columns" = Table.RemoveColumns(AddedFiscalWeek,{"FYNumber"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"Start Date of Week", type date}, {"Quarter", type text}, {"FiscalMonth", type text}, {"FiscalMonthLong", type text}, {"FiscalQuarter", type text}, {"FiscalYear", type text}, {"FutureDate", type text}, {"CurFiscalYearOffset", Int64.Type}, {"MonthYear", type text}, {"MonthYearLong", type text}, {"WeekdayWeekend", type text}})
+		
+		in
+		    #"Changed Type1"
+		```
+	lineageTag: ec39a88c-d447-4a6f-b843-b3fa8905be00
+
+expression Billings =
+		let
+			Source = Sql.Database("db-server-prod-eastus-dw-01.database.windows.net", "AvantDW"),
+			pbi_Billings = Source{[Schema="pbi",Item="Billings"]}[Data],
+		    #"Duplicated Column" = Table.DuplicateColumn(pbi_Billings, "Account", "Account - Copy"),
+		    #"Extracted Text Before Delimiter" = Table.TransformColumns(#"Duplicated Column", {{"Account", each Text.BeforeDelimiter(_, "-", 1), type text}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Extracted Text Before Delimiter",{{"Account", "Account Stripped"}, {"Account - Copy", "Account - Original"}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each [RPM System] = "RPM-AVANT"),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [Commission Month] <= #"From (Date)")
+		in
+		    #"Filtered Rows1"
+	lineageTag: 1906d177-3c24-41ce-9314-8d1289cafaa1
+	queryGroup: Billings
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression AllAccounts =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    Accounts = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="Accounts"]}[Data],
+		    #"Filtered Rows" = Table.SelectRows(Accounts, each true),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"CreatedDate", type date}, {"Agency_Agreement_Signed__c", type date}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Id", "AccountName", "RecordTypeId", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CurrencyIsoCode", "CreatedDate", "AccountSource", "Region__c", "Onboarding_Phase__c", "Strategic_Priority__c", "Last_Pathfinder_Training__c", "Priority_Level__c", "Avant_ICM__c", "Agency_Agreement_Signed__c", "Avant_Account_Manager__c", "Comp_1_Notes__c", "Comp_1_Percent__c", "Comp_2_Percent__c", "Compensation_Type__c", "MasterAgent__c", "NDA_Sent__c", "NDA_Signed__c", "Primary_Contact__c", "Source__c", "Status__c", "Community Seats", "Annual Commitment", "Reboard_Date__c", "BattleApp_Training_Completed__c", "SPIFF_Comp__c", "First_Active__c", "First_Win__c", "Pinnacle_Membership_Tier__c", "ProviderContract_Commissions_Paid_On__c", "Referring_Vendor__c", "LP_CY_Opp_MRC_Credits__c", "LP_PY_Opp_MRC_Credits__c", "Pathfinder_Calculated_Tier_Plan__c", "Pathfinder_Tier_Plan_Override_Exp_Date__c", "Pathfinder_Tier_Plan__c", "Pinnacle_Current_Year_Tier_Plan__c", "Contract_Signed_Date__c", "Account_Origin__c"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Community Seats", Int64.Type}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Primary_Contact__c", "Primary Contact"}, {"MasterAgent__c", "Master Agent"}, {"Region__c", "Region"}, {"Onboarding_Phase__c", "Account Phase"}, {"Last_Pathfinder_Training__c", "Last Pathfinder Training"}, {"Strategic_Priority__c", "Strategic Priority"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: d4b3d002-dae9-4cd6-85fc-f9a5715abdc5
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression Partners = ```
+		let
+		    Source = AllAccounts,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([RecordTypeId] = "012600000001GagAAE")),
+		    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"Avant_Account_Manager__c"}, #"User (2)", {"Id"}, "User", JoinKind.LeftOuter),
+		    #"Expanded User" = Table.ExpandTableColumn(#"Merged Queries", "User", {"Name"}, {"Name"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Expanded User",{"Id", "AccountName", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CurrencyIsoCode", "CreatedDate", "AccountSource", "Region", "Account Phase", "Last Pathfinder Training", "Priority_Level__c", "Avant_ICM__c", "Agency_Agreement_Signed__c", "Avant_Account_Manager__c", "Comp_1_Notes__c", "Comp_1_Percent__c", "Comp_2_Percent__c", "Compensation_Type__c", "NDA_Sent__c", "NDA_Signed__c", "Primary Contact", "Source__c", "Status__c", "Community Seats", "Annual Commitment", "Reboard_Date__c", "Contract_Signed__c", "Partnership_Status__c", "BattleApp_Training_Completed__c", "SPIFF_Comp__c", "First_Active__c", "First_Win__c", "Pinnacle_Membership_Tier__c", "ProviderContract_Commissions_Paid_On__c", "Referring_Vendor__c", "LP_CY_Opp_MRC_Credits__c", "LP_PY_Opp_MRC_Credits__c", "Pathfinder_Calculated_Tier_Plan__c", "Pathfinder_Tier_Plan_Override_Exp_Date__c", "Pathfinder_Tier_Plan__c", "Pinnacle_Current_Year_Tier_Plan__c", "Account_Origin__c", "Name"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"Name", "Channel Manager"}, {"Agency_Agreement_Signed__c", "AgreementDate"}, {"First_Active__c", "First Active"}, {"First_Win__c", "First Win"}, {"AccountName", "Seller"}, {"Priority_Level__c", "Seller Priority"}, {"Reboard_Date__c", "Reboard Date"}}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Renamed Columns",{{"Comp_1_Percent__c", "Standard Comp Percent"}, {"Id", "Seller Id"}, {"BillingStreet", "Billing Street"}, {"BillingCity", "Billing City"}, {"BillingState", "Billing State"}, {"BillingPostalCode", "Billing Postal Code"}, {"BillingCountry", "Billing Country"}, {"CreatedDate", "Created Date"}, {"AgreementDate", "Agreement Date"}, {"Avant_Account_Manager__c", "Avant Account Manager"}, {"Comp_1_Notes__c", "Comp Notes"}, {"Comp_2_Percent__c", "Enhanced Comp Percent"}, {"Compensation_Type__c", "Compensation Type"}, {"Source__c", "Source"}, {"Status__c", "Status"}, {"Community Seats", "# of Community Seats"}, {"Contract_Signed__c", "Contract Signed"}, {"BattleApp_Training_Completed__c", "Onboard Date"}, {"SPIFF_Comp__c", "SPIFF Comp"}, {"Seller", "Partner"}, {"ProviderContract_Commissions_Paid_On__c", "Provider Contract Commissions Paid On"}, {"Partnership_Status__c", "Partnership Status"}, {"NDA_Signed__c", "NDA Signed"}, {"NDA_Sent__c", "NDA Sent"}, {"Avant_ICM__c", "Avant ICM"}, {"Pinnacle_Membership_Tier__c", "Pinnacle Membership Tier"}, {"LP_CY_Opp_MRC_Credits__c", "LP CY Opp MRC Credits"}, {"LP_PY_Opp_MRC_Credits__c", "LP PY Opp MRC Credits"}, {"Pathfinder_Tier_Plan_Override_Exp_Date__c", "Pathfinder Tier Plan Override Exp Date"}, {"Pathfinder_Tier_Plan__c", "Pathfinder Tier Plan"}, {"Pinnacle_Current_Year_Tier_Plan__c", "Pinnacle Current Year Tier Plan"}}),
+		    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns1", {"Primary Contact"}, Contact, {"Id"}, "Contact", JoinKind.LeftOuter),
+		    #"Expanded Contact" = Table.ExpandTableColumn(#"Merged Queries1", "Contact", {"Name", "MailingStreet", "MailingCity", "MailingState", "MailingPostalCode", "MailingCountry", "Phone", "Email"}, {"Primary Contact.Name", "Primary Contact.MailingStreet", "Primary Contact.MailingCity", "Primary Contact.MailingState", "Primary Contact.MailingPostalCode", "Primary Contact.MailingCountry", "Primary Contact.Phone", "Primary Contact.Email"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Contact", each ([Avant Account Manager] <> "")),
+		    #"Merged Queries2" = Table.NestedJoin(#"Filtered Rows1", {"Pinnacle Current Year Tier Plan"}, #"Tier Plan", {"X18_Digit_Tier_Plan_Id_Hidden__c"}, "Tier Plan", JoinKind.LeftOuter),
+		    #"Expanded Tier Plan" = Table.ExpandTableColumn(#"Merged Queries2", "Tier Plan", {"Name", "LP_Total_MRC_Credits_End__c", "LP_Total_MRC_Credits_Start__c"}, {"Name", "LP_Total_MRC_Credits_End__c", "LP_Total_MRC_Credits_Start__c"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Expanded Tier Plan",{"Pinnacle Current Year Tier Plan"}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Columns",{{"Name", "Pinnacle Current Year Tier Plan"}, {"LP_Total_MRC_Credits_End__c", "LP Total MRC Credits End"}, {"LP_Total_MRC_Credits_Start__c", "LP Total MRC Credits Start"}}),
+		    #"Merged Queries4" = Table.NestedJoin(#"Renamed Columns2", {"Pathfinder_Calculated_Tier_Plan__c"}, #"Tier Plan", {"Id"}, "Tier Plan", JoinKind.LeftOuter),
+		    #"Expanded Tier Plan1" = Table.ExpandTableColumn(#"Merged Queries4", "Tier Plan", {"Name"}, {"Tier Plan.Name"}),
+		    #"Renamed Columns4" = Table.RenameColumns(#"Expanded Tier Plan1",{{"Tier Plan.Name", "Pathfinder Calculated Tier Plan"}}),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns4",{"Pathfinder_Calculated_Tier_Plan__c"}),    
+			#"Merged Queries3" = Table.NestedJoin(#"Removed Columns1", {"Referring_Vendor__c"}, Vendors, {"Vendor Id"}, "Vendors", JoinKind.LeftOuter),
+		    #"Expanded Vendors" = Table.ExpandTableColumn(#"Merged Queries3", "Vendors", {"Vendor"}, {"Vendor"}),
+		    #"Renamed Columns3" = Table.RenameColumns(#"Expanded Vendors",{{"Vendor", "Referrring Vendor"}})
+		in
+		    #"Renamed Columns3"
+		```
+	lineageTag: e70a43e2-7acb-47c0-9cdb-d7a399e8208f
+
+expression 'User (2)' =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    User1 = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="User"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(User1,{"Id", "Username", "LastName", "FirstName", "Name", "City", "State", "PostalCode", "Country", "Email", "IsActive", "UserRoleId", "CreatedDate", "ContactId", "AccountId", "User_Role_Name__c", "User_Profile_Name__c"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"AccountId"}, AllAccounts, {"Id"}, "AllAccounts", JoinKind.LeftOuter),
+		    #"Expanded AllAccounts" = Table.ExpandTableColumn(#"Merged Queries", "AllAccounts", {"AccountName", "Id", "RecordTypeId"}, {"AccountName", "Id.1", "RecordTypeId"}),
+		    #"Added Conditional Column" = Table.AddColumn(#"Expanded AllAccounts", "Account Record Type", each if [RecordTypeId] = "012600000001GagAAE" then "Seller" else if [RecordTypeId] = "012600000009fF7AAI" then "Provider" else if [RecordTypeId] = "012600000005PApAAM" then "Provider" else "Customer"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Account Record Type", type text}, {"CreatedDate", type date}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Id.1", "Account Id"}, {"RecordTypeId", "Account Record Type Id"}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"Account Record Type Id"}),
+		    #"Added Conditional Column1" = Table.AddColumn(#"Removed Columns", "CM_Check", each if Text.Contains([User_Profile_Name__c], "Channel Manager") then "CM" else "Non-CM")
+		in
+		    #"Added Conditional Column1"
+	lineageTag: 981905ec-ecac-4979-bc18-c9074ae138ab
+
+	annotation PBI_ResultType = Exception
+
+expression Contact =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    Contact1 = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="Contact"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Contact1,{"Id", "AccountId", "LastName", "FirstName", "Name", "RecordTypeId", "MailingStreet", "MailingCity", "MailingState", "MailingPostalCode", "MailingCountry", "MailingLatitude", "MailingLongitude", "Phone", "Email", "Title", "OwnerId"}),
+		    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"AccountId"}, AllAccounts, {"Id"}, "AllAccounts", JoinKind.LeftOuter),
+		    #"Expanded AllAccounts" = Table.ExpandTableColumn(#"Merged Queries", "AllAccounts", {"AccountName", "RecordTypeId"}, {"AccountName", "RecordTypeId.1"})
+		in
+		    #"Expanded AllAccounts"
+	lineageTag: 3ca12171-45cc-4102-9999-2451e26e9c84
+
+	annotation PBI_ResultType = Exception
+
+expression 'Tier Plan' =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    #"Tier Plan1" = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="Tier Plan"]}[Data]
+		in
+		    #"Tier Plan1"
+	lineageTag: fbde7660-d02f-4104-a7c3-6e5e824ff1e4
+
+	annotation PBI_ResultType = Exception
+
+expression Vendors =
+		let
+		    Source = AllAccounts,
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([RecordTypeId] = "012600000005PApAAM" or [RecordTypeId] = "012600000009fF7AAI")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Id", "AccountName", "RecordTypeId", "BillingStreet", "BillingCity", "BillingState", "BillingPostalCode", "BillingCountry", "CurrencyIsoCode", "CreatedDate", "Strategic Priority", "Master Agent", "Contract_Signed__c", "Contract_Signed_Date__c"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"AccountName", "Vendor"}, {"Id", "Vendor Id"}, {"BillingStreet", "Billing Street"}, {"BillingCity", "Billing City"}, {"BillingState", "Billing State"}, {"BillingPostalCode", "Billing Postal Code"}, {"BillingCountry", "Billing Country"}, {"CreatedDate", "Created Date"}}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Renamed Columns", each ([Master Agent] <> "0010z00001aliPnAAI"))
+		in
+		    #"Filtered Rows1"
+	lineageTag: 109501fe-3e02-47f2-98ff-8b419c4e7a1e
+
+	annotation PBI_ResultType = Exception
+
+expression 'Bookings (SalesForce)' =
+		let
+		    Source = PowerBI.Dataflows(null),
+		    #"6f46c9da-34db-46a0-8a03-583959040559" = Source{[workspaceId="6f46c9da-34db-46a0-8a03-583959040559"]}[Data],
+		    #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8" = #"6f46c9da-34db-46a0-8a03-583959040559"{[dataflowId="8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"]}[Data],
+		    #"Bookings (SalesForce)1" = #"8c0fc70b-9deb-42a4-ace0-c20bccbfd6f8"{[entity="Bookings (SalesForce)"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(#"Bookings (SalesForce)1",{"Id", "StageName", "RO_Account_Name__c", "RPM_Account_Number__c", "Winning_Provider_Hidden__c"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Other Columns", each ([RPM_Account_Number__c] <> "") and ([Winning_Provider_Hidden__c] = "Equinix")),
+		    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [StageName] = "Closed Won Approved"),
+		    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Filtered Rows1", "Text Before Delimiter", each Text.BeforeDelimiter([#"RPM_Account_Number__c"], "-", 1), type text),
+		    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text Before Delimiter",{{"Text Before Delimiter", "New RPM Account Code"}, {"RPM_Account_Number__c", "RPM_Account_Number__c Original"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: a0ba17b8-2902-4176-8f5e-4327fcc00e6a
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression 'Errors in Sheet 1' =
+		let
+		Source = RenewalInput,
+		  #"Detected Type Mismatches" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "The type of the value does not match the type of the column.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Source, pairs),
+		  #"Added Index" = Table.AddIndexColumn(#"Detected Type Mismatches", "Row Number" ,1),
+		  #"Kept Errors" = Table.SelectRowsWithErrors(#"Added Index", {"Billing Account Name", "Deal ID", "Billing Agreement Number", "Derived Opportunity Partner Name", "Opportunity Partner Sub Type", "Sub Agent Company", "Price Increase Percent", "Auto Price Increase Flag", "IBX", "Billing Agreement Line POF Name", "Initial Term", "Renewal Term", "Customer Notice Period"}),
+		  #"Reordered Columns" = Table.ReorderColumns(#"Kept Errors", {"Row Number", "Billing Account Name", "Deal ID", "Billing Agreement Number", "Derived Opportunity Partner Name", "Opportunity Partner Sub Type", "Sub Agent Company", "Price Increase Percent", "Auto Price Increase Flag", "IBX", "Billing Agreement Line POF Name", "Initial Term", "Renewal Term", "Customer Notice Period"}),
+		    #"Price Increase Percent" = #"Reordered Columns"{0}[Price Increase Percent]
+		in
+		  #"Price Increase Percent"
+	lineageTag: dcaa053d-bb6c-45f9-a698-a2cad67410fa
+	queryGroup: 'Query Errors - 6/4/2026 9:09:21 AM'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Equinix Renewals - v3"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f869aada-2795-47ba-95f3-13c1eaef0a14"
+  }
+}

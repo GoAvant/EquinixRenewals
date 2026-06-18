@@ -1,0 +1,47 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Information from RPM standardized for Salesforce
+queryGroup Billings
+
+	annotation PBI_QueryGroupOrder = 0
+
+/// Errors in queries that were loaded on 6/4/2026 9:09:21 AM.
+queryGroup 'Query Errors - 6/4/2026 9:09:21 AM'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation PBI_QueryOrder = ["To Horizon (Date)","From (Date)","User","_Partners","Known Accounts","Unknown End Dates","All Accounts","Refresh Date","Calendar (2)","Billings","AllAccounts","Partners","User (2)","Contact","Tier Plan","Vendors","Bookings (SalesForce)","RenewalInput","Errors in Sheet 1"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Known Accounts'
+ref table DateTableTemplate_07ee4561-541e-4145-8cc3-e906db2c8901
+ref table LocalDateTable_4f4a7f04-595d-4dd8-9c3c-db496ca100f1
+ref table LocalDateTable_f2cafdfb-8f74-407c-856c-91329ebf109c
+ref table LocalDateTable_f7e4c6b9-6d3d-43ba-b044-645c2955d8dd
+ref table 'Refresh Date'
+ref table LocalDateTable_59e5de0c-59f1-4cd9-9e4c-ac2b039902c3
+ref table 'Unknown End Dates'
+ref table 'All Accounts'
+ref table LocalDateTable_54339def-4b51-4a44-bc72-c3593523db0b
+ref table LocalDateTable_2d736262-68b3-4b32-ac74-b125c6f27661
+ref table LocalDateTable_7ebdf740-914d-4cd2-b5bf-992310c89a40
+ref table LocalDateTable_ac0cd511-980b-485a-986f-099acbafab3f
+ref table _Summary1
+ref table LocalDateTable_e36148ec-b864-4168-bc33-fcc3ad0fdeed
+ref table LocalDateTable_d8bcfda0-ae13-494d-b566-96d082908bfd
+ref table LocalDateTable_81f22f78-e3df-4480-8197-255bbfb495de
+ref table LocalDateTable_0eccc50a-3f61-46e8-9a97-87ea0c284d06
+ref table LocalDateTable_ab788379-fef8-4d32-8332-3da45d4364c3
+ref table RenewalInput
+
+ref cultureInfo en-US
+

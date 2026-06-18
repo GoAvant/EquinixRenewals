@@ -1,0 +1,49 @@
+table _Summary1
+	lineageTag: 4fa17bce-1968-459c-82f6-63bafe45c4ca
+
+	column 'Customer Name'
+		lineageTag: 81699d4a-809d-4e23-a31c-3d54af9540c3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Known Accounts[Customer Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Agency'
+		lineageTag: efb0b80a-8326-4ee6-879a-7c6dde495311
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Known Accounts[Billings.Agency]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bookings (SalesForce).Id'
+		lineageTag: d1b33078-a9a6-446c-8db0-9ab86ef38942
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Known Accounts[Bookings (SalesForce).Id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billings.Account'
+		lineageTag: 234f74ed-c9f8-49c2-83f3-8874cffd51e9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Known Accounts[Billings.Account]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bookings (SalesForce).RPM_Account_Number__c Original'
+		lineageTag: 613903b6-f0e0-4d24-8be4-a1c6d7c7aa90
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Known Accounts[Bookings (SalesForce).RPM_Account_Number__c Original]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Summary1 = calculated
+		mode: import
+		source = SUMMARIZECOLUMNS('Known Accounts'[Customer Name],'Known Accounts'[Billings.Agency],'Known Accounts'[Bookings (SalesForce).Id],'Known Accounts'[Billings.Account], 'Known Accounts'[Bookings (SalesForce).RPM_Account_Number__c Original])
+
+	annotation PBI_Id = 3ac9b89fcbe44094821b4b311ea82690
+
