@@ -1,11 +1,11 @@
-expression 'To Horizon (Date)' = #date(2026, 11, 30) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+expression 'To Horizon (Date)' = #date(2026, 12, 31) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
 	lineageTag: a7c4911a-3587-4337-b9fa-90e2b75a7d2c
 
 	annotation PBI_ResultType = Date
 
 	annotation PBI_NavigationStepName = Navigation
 
-expression 'From (Date)' = #date(2026, 6, 1) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+expression 'From (Date)' = #date(2026, 7, 1) meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
 	lineageTag: baef0033-1c41-4f32-b523-5a97f48ca44a
 
 	annotation PBI_ResultType = Date

@@ -21,7 +21,7 @@ table 'Refresh Date'
 
 	partition 'Refresh Date-0c987c48-5983-480d-86c7-1bd28d50e001' = m
 		mode: import
-		source = #date(2026, 6, 4) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+		source = #date(2026, 7, 7) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
 
 	annotation PBI_ResultType = Date
 
